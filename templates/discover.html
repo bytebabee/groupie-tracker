@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/styles/main.css">
+    <link rel="stylesheet" href="/static/styles/breakpoints.css">
+    <link rel="shortcut icon" href="/static/img/favicon.ico" />
+    <title>Discover</title>
+</head>
+
+<body>
+    <div class="cursor" id="cursor"></div>
+    <div class="header">
+        <h1>
+            GR<a href="/" class="logo-link">
+                <img class="logo" src="/static/img/logo.svg" alt="Logo" />
+            </a>UPIE TRACKER
+        </h1>
+
+        <div class="search-container">
+            <form action="/discover" method="GET">
+                <input type="text" name="query" id="search" placeholder="Search...">
+            </form>
+            <div class="suggestions">
+                {{range .Results}}
+                <div>{{.}}</div>
+                {{end}}
+            </div>
+        </div>
+
+        <div class="mobile-icons">
+            <a href="/home" class="icon-link">
+                <img src="/static/img/home.png" alt="Home" class="icon">
+            </a>
+            <a href="/discover" class="icon-link">
+                <img src="/static/img/discover.png" alt="Discover" class="icon">
+            </a>
+            <a href="/about" class="icon-link">
+                <img src="/static/img/about.png" alt="About" class="icon">
+            </a>
+        </div>
+    </div>
+    <!-- Side Menu -->
+    <div class="side-menu">
+        <a href="\" class="menu-item home">
+            <span>Home</span>
+        </a>
+        <div class="menu-item discover active"><span>Discover</div>
+        <a href="\about" class="menu-item about">
+            <span>About</span>
+        </a>
+    </div>
+    <div class="page-layout">
+        <img class="image5" src="/static/img/shape5.png" />
+        <img class="wire" src="/static/img/Vector2.png" />
+        <div class="artists-grid">
+            <div class="wrapper">
+                {{range .Artists}}
+                <div class="artist-card">
+                    <a href="/artist/{{.ID}}">
+                        <div class="image-container">
+                            <img src="{{.Image}}" alt="{{.Name}}">
+                            <div class="overlay"></div>
+                        </div>
+                    </a>
+                    <span class="artist-name">{{.Name}}</span>
+                </div>
+                {{end}}
+            </div>
+        </div>
+        <script src="/static/cursor.js"></script>
+</body>
+
+</html>

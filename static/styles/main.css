@@ -1,0 +1,327 @@
+/* -------------------------------
+   IMPORTS
+-------------------------------- */
+@import "./global.css";
+@import "./components.css";
+
+/* -------------------------------
+   IMAGES & DECORATIVE ELEMENTS
+-------------------------------- */
+.guitar-player {
+  position: absolute;
+  width: 100%;
+  max-width: 600px;
+  height: auto;
+  top: 5%;
+  left: 5%;
+  transition: all 0.3s ease-in-out;
+  z-index: 1;
+}
+
+.image1 {
+  position: absolute;
+  top: 8%;
+  right: 13%;
+  width: 8%;
+  z-index: 1;
+}
+
+.image1:hover,
+.image2:hover,
+img.cd:hover,
+.logo:hover {
+  animation: spin 4s linear infinite;
+  transform-origin: center;
+}
+
+.image5 {
+  position: absolute;
+  max-width: 400px;
+  top: 14%;
+  right: 13%;
+  z-index: 0;
+}
+
+.wire {
+  position: absolute;
+  top: 4%;
+  right: 0%;
+  width: 35%;
+  z-index: 0;
+  object-fit: contain;
+  height: auto;
+  transition: right 0.3s ease;
+}
+
+.main-content .wire2 {
+  position: relative;
+  bottom: -35%;
+  right: -70%;
+  width: 40%;
+  height: auto;
+  z-index: -1;
+}
+
+/* -------------------------------
+   CONTENT BOX
+-------------------------------- */
+.box {
+  position: absolute;
+  top: 58%;
+  right: 8%;
+  width: 28rem;
+  height: 15rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 1rem;
+}
+
+.text {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 1rem;
+}
+
+.text-wrapper {
+  font-size: var(--font-xl);
+  text-align: left;
+}
+
+.div {
+  font-size: var(--font-md);
+  color: #333;
+  text-align: left;
+  margin: 0;
+}
+
+/* -------------------------------
+   ARTISTS GRID
+-------------------------------- */
+.artists-grid {
+  position: fixed;
+  width: calc(100vh - var(--header-height));
+  height: calc(100vw - var(--side-menu-width));
+  transform: rotate(-90deg) translateX(-100vh);
+  transform-origin: top left;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  top: -5vh;
+  left: 0;
+}
+
+.wrapper {
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-rows: repeat(2, min-content);
+  gap: 2rem;
+  padding: 25rem 2rem;
+  transform: rotate(90deg) translateY(-75%);
+  transform-origin: top left;
+  width: max-content;
+  margin-top: 0;
+}
+
+/* -------------------------------
+   ABOUT PAGE
+-------------------------------- */
+.about-team-container {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
+}
+
+.about-team-card {
+  background: var(--color-lime);
+  border: 2px solid var(--color-black);
+  border-radius: var(--border-radius);
+  padding: 10px;
+  box-shadow: var(--box-shadow);
+  transition: transform 0.3s, box-shadow 0.3s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  max-width: 300px;
+  flex: 1 1 0;
+}
+
+.about-team-card .about-image-container {
+  width: 100%;
+  aspect-ratio: 1;
+  overflow: hidden;
+  border-radius: 100%;
+}
+
+.about-team-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.about-team-card .artist-name {
+  font-size: var(--font-md);
+  font-weight: bold;
+}
+
+.about-team-card p {
+  font-size: var(--font-md);
+  margin: 0;
+}
+
+/* -------------------------------
+   ARTIST PAGE
+-------------------------------- */
+.artist-page-layout {
+  position: absolute;
+  height: calc(100vh - var(--header-height));
+  width: calc(100vw - var(--side-menu-width));
+  left: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  align-items: center;
+}
+
+.artist-page-layout .main-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+}
+
+.artist-info-section {
+  display: flex;
+  height: fit-content;
+  gap: 100px;
+  flex-wrap: wrap;
+  width: 100%;
+  justify-content: center;
+  margin-top: 100px;
+}
+
+.artist-image-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.artist-image-section .image-container {
+  position: relative;
+  z-index: 1;
+  width: 20vw;
+  min-width: 200px;
+  background: var(--color-yellow);
+  border: 2px solid var(--color-black);
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 6px 0 var(--color-black);
+  transition: transform 0.3s, box-shadow 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.artist-image-section .image-container img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.artist-image-section .cd {
+  position: relative;
+  width: 20vw;
+  min-width: 200px;
+  max-width: 300px;
+  z-index: 0;
+  margin-left: -135px;
+  transform-origin: center;
+}
+
+.artist-details-section {
+  max-width: fit-content;
+  height: fit-content;
+  flex: 1;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex-wrap: wrap;
+}
+
+.artist-details-section h1 {
+  margin-top: 0;
+}
+
+.artist-details {
+  font-size: clamp(18px, 2vw, 20px);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+
+.artist-marquee-section {
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  position: absolute;
+  bottom: 10%;
+}
+
+/* -------------------------------
+   404 PAGE
+-------------------------------- */
+.error-page-layout {
+  display: flex;
+  flex: 1;
+  height: calc(100vh - var(--header-height));
+  width: calc(100vw - var(--side-menu-width));
+  justify-content: center;
+  align-items: center;
+}
+
+.error-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 20px;
+  width: 90%;
+  max-width: 800px;
+}
+
+.broken-guitar {
+  width: 100%;
+  max-width: 600px;
+  height: auto;
+}
+
+.record-player {
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+}
+
+.error-message {
+  font-size: clamp(1rem, 5vw, var(--font-md));
+  /* Responsive font size */
+}
+
+.dc-logo {
+  height: 30px !important;
+  width: auto !important;
+}

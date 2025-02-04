@@ -1,0 +1,248 @@
+/* -------------------------------
+   BUTTONS
+-------------------------------- */
+.content-button {
+  background-color: var(--color-orange);
+  color: var(--color-black);
+  border: 2px solid var(--color-black);
+  border-radius: var(--border-radius);
+  padding: 10px 20px;
+  font-size: var(--font-sm);
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.content-button:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 4px 4px 0 var(--color-black);
+}
+
+.back-button {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  color: #000;
+  padding: 10px 20px;
+  text-decoration: none;
+  font-size: var(--font-md);
+  transition: text-decoration;
+}
+
+.back-button:hover {
+  text-decoration: underline;
+}
+
+.button-container {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  width: 100%;
+}
+
+.discover-button-container {
+  display: flex;
+  justify-content: flex-start;
+}
+
+/* -------------------------------
+   ACCORDION
+-------------------------------- */
+/* Core styles for the accordion */
+.accordion {
+  color: var(--color-black);
+  overflow: hidden;
+  display: inline-block;
+  width: fit-content;
+  margin: 0;
+  padding: 0;
+}
+
+.accordion-container {
+  margin: 0;
+  padding: 0;
+}
+
+.members-list {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.members-list li {
+  margin: 0;
+  padding: 0;
+}
+
+/* Reset the label and content styles */
+.tab__label {
+  display: flex;
+  cursor: pointer;
+  justify-content: space-between;
+  gap: 7rem;
+  padding: 0;
+  margin: 0;
+  margin-bottom: 10px;
+}
+
+.tab__label::after {
+  content: "\276F";
+  /* Arrow icon */
+  width: 1em;
+  height: 1em;
+  text-align: center;
+  transform: rotate(90deg);
+  transition: all 0.35s;
+}
+
+.accordion-checkbox:checked+.tab__label::after {
+  transform: rotate(270deg);
+  /* Rotate arrow when checked */
+}
+
+.accordion-checkbox {
+  position: absolute;
+  opacity: 0;
+  /* Hide the checkbox */
+  z-index: -1;
+}
+
+.tab__content {
+  max-height: 0;
+  overflow: hidden;
+  transition: all 0.35s;
+}
+
+.accordion-checkbox:checked~.tab__content {
+  max-height: fit-content;
+  /* Adjust height when expanded */
+}
+
+/* Hover animation for arrow */
+.accordion-checkbox:not(:checked)+.tab__label:hover::after {
+  animation: bounce .5s infinite;
+}
+
+/* -------------------------------
+   MARQUEE
+-------------------------------- */
+.marquee {
+  --gap: 1rem;
+  position: relative;
+  display: flex;
+  height: 5rem;
+  width: 100%;
+  align-items: center;
+  background: var(--color-purple);
+  border: 2px solid var(--color-black);
+  border-left: none;
+  border-radius: 0;
+  overflow: hidden;
+  user-select: none;
+  gap: var(--gap);
+}
+
+.marquee-content {
+  font-size: var(--font-md);
+  list-style: none;
+  flex-shrink: 0;
+  display: flex;
+  justify-content: space-around;
+  gap: var(--gap);
+  min-width: 100%;
+  padding: 0;
+  animation: scroll 50s linear infinite;
+}
+
+.marquee:hover .marquee-content {
+  animation-play-state: paused;
+}
+
+/* -------------------------------
+   ARTIST CARDS
+-------------------------------- */
+.artist-card {
+  background: var(--color-yellow);
+  border: 2px solid var(--color-black);
+  border-radius: var(--border-radius);
+  padding: 10px;
+  box-shadow: var(--box-shadow);
+  transition: transform 0.3s, box-shadow 0.3s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 200px;
+  height: 250px;
+  position: relative;
+}
+
+.artist-card:hover {
+  transform: translate(-5px, -5px);
+  box-shadow: 10px 7px 0 #000;
+}
+
+.artist-card img,
+.image-container img {
+  width: 100%;
+  height: auto;
+  border-radius: 100%;
+  display: block;
+}
+
+.image-container {
+  position: relative;
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.artist-card .overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(125, 3, 255, 0.504);
+  border-radius: 100px;
+  opacity: 1;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.artist-card:hover .overlay {
+  opacity: 0;
+}
+
+.artist-name {
+  font-size: var(--font-sm);
+  color: #000;
+  margin-top: 10px;
+  position: relative;
+}
+
+/* -------------------------------
+   CURSOR
+-------------------------------- */
+.cursor {
+  position: fixed;
+  height: 30px;
+  width: 30px;
+  background-color: #E6FF00;
+  border-radius: 100%;
+  margin-left: -22px;
+  margin-top: -22px;
+  z-index: 1000;
+  pointer-events: none;
+  transition: transform 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
+  /* Create the color swap effect */
+  backdrop-filter: invert(1) hue-rotate(180deg);
+  mix-blend-mode: difference;
+}
+
+.cursor.active {
+  transform: scale(1.5);
+}
