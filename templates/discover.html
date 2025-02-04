@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/styles/main.css">
+    <link rel="stylesheet" href="/static/styles/breakpoints.css">
+    <link rel="shortcut icon" type="image/x-icon" href="/static/img/favicon.ico">
+    <link rel="icon" type="image/x-icon" href="/static/img/favicon.ico">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <link rel="apple-touch-icon" href="/static/img/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" href="/static/img/favicon.ico">
+    <title>Discover</title>
+</head>
+
+<body>
+    <div class="cursor" id="cursor"></div>
+    <div class="header">
+        <h1>
+            GR<a href="/" class="logo-link">
+                <img class="logo" src="/static/img/logo.svg" alt="Logo" />
+            </a>UPIE TRACKER
+        </h1>
+        <div class="mobile-icons">
+            <a href="/home" class="icon-link">
+                <img src="/static/img/home.png" alt="Home" class="icon">
+            </a>
+            <a href="/discover" class="icon-link">
+                <img src="/static/img/discover.png" alt="Discover" class="icon">
+            </a>
+            <a href="/about" class="icon-link">
+                <img src="/static/img/about.png" alt="About" class="icon">
+            </a>
+        </div>
+    </div>
+    <!-- Side Menu -->
+    <div class="side-menu">
+        <a href="\" class="menu-item home">
+            <span>Home</span>
+        </a>
+        <div class="menu-item discover active"><span>Discover</div>
+        <a href="\about" class="menu-item about">
+            <span>About</span>
+        </a>
+    </div>
+    <!-- Search Section -->
+    <div class="search-section">
+        <div class="search-container">
+            <form id="searchForm" action="/discover" method="GET">
+                <input 
+                    type="text" 
+                    name="query" 
+                    id="searchInput" 
+                    class="search-input" 
+                    placeholder="Search artists..."
+                >
+                <button type="submit" class="search-button">
+                    <img src="/static/img/search.png" alt="Search" class="search-icon">
+                </button>
+            </form>
+            <div class="suggestions">
+                {{range .Results}}
+                <a href="/discover?query={{.}}" class="suggestion-item">{{.}}</a>
+                {{end}}
+            </div>
+        </div>
+    </div>
+    <!-- Original page layout -->
+    <div class="page-layout">
+        {{if .Artists}}
+        <div class="artists-grid">
+            <div class="wrapper">
+                {{range .Artists}}
+                <div class="artist-card">
+                    <a href="/artist/{{.ID}}">
+                        <div class="image-container">
+                            <img src="{{.Image}}" alt="{{.Name}}">
+                            <div class="overlay"></div>
+                        </div>
+                    </a>
+                    <span class="artist-name">{{.Name}}</span>
+                </div>
+                {{end}}
+            </div>
+        </div>
+        {{else}}
+        <div class="no-results">
+            <img src="/static/img/file-mic.png" alt="No results" class="record-player">
+            <h3>No Result</h3>
+            <p>Try searching with another word(maybe another word)?!</p>
+        </div>
+        {{end}}
+    </div>
+    <script src="/static/cursor.js"></script>
+    <script src="/static/search.js"></script>
+</body>
+
+</html>

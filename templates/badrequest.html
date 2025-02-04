@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/styles/main.css">
+    <link rel="stylesheet" href="/static/styles/breakpoints.css">
+    <link rel="shortcut icon" type="image/x-icon" href="/static/img/favicon.ico">
+    <link rel="icon" type="image/x-icon" href="/static/img/favicon.ico">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <link rel="apple-touch-icon" href="/static/img/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" href="/static/img/favicon.ico">
+    <title>Bad request</title>
+</head>
+
+<body>
+    <div class="cursor" id="cursor"></div>
+    <div class="header">
+        <h1>
+            GR<a href="/" class="logo-link">
+                <img class="logo" src="/static/img/logo.svg" alt="Logo" />
+            </a>UPIE TRACKER
+        </h1>
+        <div class="mobile-icons">
+            <a href="/home" class="icon-link">
+                <img src="/static/img/home.png" alt="Home" class="icon">
+            </a>
+            <a href="/discover" class="icon-link">
+                <img src="/static/img/discover.png" alt="Discover" class="icon">
+            </a>
+            <a href="/about" class="icon-link">
+                <img src="/static/img/about.png" alt="About" class="icon">
+            </a>
+        </div>
+    </div>
+    <!-- Side Menu -->
+    <div class="side-menu">
+        <a href="\" class="menu-item home">
+            <span>Home</span>
+        </a>
+        <a href="\discover" class="menu-item discover">
+            <span>Discover</span>
+        </a>
+        <a href="\about" class="menu-item about">
+            <span>About</span>
+        </a>
+    </div>
+    <div class="error-page-layout">
+        <div class="error-container">
+            <img class="record-player" src="/static/img/file-mic.png" />
+            <div class="error-message">
+                <h3>This request isn’t in our setlist.</h3>
+                <p>We only have 52 artists on stage for now.</p>
+                <p>Try clicking on their names or searching with their IDs to find your tune!</p>
+                <div class="button-container">
+                    <a href="/" class="content-button">Go Home!</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="/static/cursor.js"></script>
+
+    <!-- {{if .Error}}               
+    <div class="error-message">
+        <h2>{{.Error}}</h2>
+    </div>
+    {{end}} -->
+</body>
+
+</html>

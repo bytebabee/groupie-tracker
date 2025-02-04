@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/styles/main.css">
+    <link rel="stylesheet" href="/static/styles/breakpoints.css">
+    <link rel="shortcut icon" type="image/x-icon" href="/static/img/favicon.ico">
+    <link rel="icon" type="image/x-icon" href="/static/img/favicon.ico">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <link rel="apple-touch-icon" href="/static/img/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" href="/static/img/favicon.ico">
+    <title>{{.Artist.Name}}</title>
+</head>
+
+<body>
+    <div class="cursor" id="cursor"></div>
+    <div class="header">
+        <h1>
+            GR<a href="/" class="logo-link">
+                <img class="logo" src="/static/img/logo.svg" alt="Logo" />
+            </a>UPIE TRACKER
+        </h1>
+        <div class="mobile-icons">
+            <a href="/home" class="icon-link">
+                <img src="/static/img/home.png" alt="Home" class="icon">
+            </a>
+            <a href="/discover" class="icon-link">
+                <img src="/static/img/discover.png" alt="Discover" class="icon">
+            </a>
+            <a href="/about" class="icon-link">
+                <img src="/static/img/about.png" alt="About" class="icon">
+            </a>
+        </div>
+    </div>
+    <!-- Side Menu -->
+    <div class="side-menu">
+        <a href="\" class="menu-item home">
+            <span>Home</span>
+        </a>
+        <div class="menu-item discover active"><span>Discover</div>
+        <a href="\about" class="menu-item about">
+            <span>About</span>
+        </a>
+    </div>
+    <div class="artist-page-layout">
+        <!-- Top section with artist info -->
+        <div class="artist-info-section">
+            <!-- Left side - Image -->
+            <div class="artist-image-section">
+                <div class="image-container">
+                    <img src="{{.Artist.Image}}" alt="{{.Artist.Name}}">
+                </div>
+                <img class="cd" src="https://i.imghippo.com/files/DEa5002syc.png" alt="CD" />
+            </div>
+
+            <!-- Right side - Info -->
+            <div class="artist-details-section">
+                <h1>{{.Artist.Name}}</h1>
+                <div class="artist-details">
+                    <span><strong>Creation Date:</strong> {{.Artist.CreationDate}}</span>
+                    <span><strong>First Album:</strong> {{.Artist.FirstAlbum}}</span>
+
+                    <section class="accordion">
+                        <div class="tab">
+                            <input type="checkbox" id="members-toggle" class="accordion-checkbox">
+                            <label for="members-toggle" class="tab__label"><strong>Members</strong></label>
+                            <div class="tab__content">
+                                <ul class="members-list">
+                                    {{range .Artist.Members}}
+                                    <li>{{.}}</li>
+                                    {{end}}
+                                </ul>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+        <!-- Bottom section with marquee -->
+        <div class="artist-marquee-section">
+            <div class="button-container">
+                <form method="POST" action="">
+                    <input type="hidden" name="MarqueeContent" value="Relations">
+                    <button type="submit" class="content-button">Concerts</button>
+                </form>
+                <form method="POST" action="">
+                    <input type="hidden" name="MarqueeContent" value="Locations">
+                    <button type="submit" class="content-button">Locations</button>
+                </form>
+                <form method="POST" action="">
+                    <input type="hidden" name="MarqueeContent" value="ConcertDates">
+                    <button type="submit" class="content-button">Dates</button>
+                </form>
+            </div>
+            <div class="marquee">
+                <div class="marquee">
+                    <ul class="marquee-content">
+                        {{range .MarqueeContent}}
+                        <li>
+                            <span>★&nbsp;&nbsp;&nbsp;&nbsp;{{.}}&nbsp;&nbsp;</span>
+                        </li>
+                        {{end}}
+                    </ul>
+                    <ul class="marquee-content" aria-hidden="true">
+                        {{range .MarqueeContent}}
+                        <li>
+                            <span>★&nbsp;&nbsp;&nbsp;&nbsp;{{.}}&nbsp;&nbsp;</span>
+                        </li>
+                        {{end}}
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <a href="\discover" class="back-button">← Back</a>
+        <a href="\discover" class="arrow-button">←</a>
+        <script src="/static/cursor.js"></script>
+        <script src="/static/cursor.js"></script>
+</body>
+
+</html>
