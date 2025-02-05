@@ -16,13 +16,13 @@ func searchSlice(text string, data []string) []string {
 	return sliceOfInfo
 }
 
-func Search(artists []models.Artists, text string) ([]models.Artists, []string) {
+func Search(artists []models.Artists, text string) ([]models.Artists, []string, bool) {
 	var sliceOfArtists []models.Artists
 	var msg []string
 
 	// Convert the text to lowercase for case-insensitive matching
 	text = strings.ToLower(text)
-
+	matchFound := false
 	for _, artist := range artists {
 
 		// Prepare the variables for matching
@@ -34,28 +34,33 @@ func Search(artists []models.Artists, text string) ([]models.Artists, []string) 
 		case strings.Contains(strings.ToLower(artist.Name), text): // Name match
 			sliceOfArtists = append(sliceOfArtists, artist)
 			msg = append(msg, artist.Name+"-Name")
+			matchFound = true
 
 		case members != nil: // Member match
 			for _, member := range members {
 				msg = append(msg, member+"-Artist/Band member")
 			}
 			sliceOfArtists = append(sliceOfArtists, artist)
+			matchFound = true
 
 		case strings.Contains(artist.FirstAlbum, text):
 			sliceOfArtists = append(sliceOfArtists, artist)
-			msg = append(msg, artist.FirstAlbum+"-First album of"+artist.Name)
+			msg = append(msg, artist.FirstAlbum+"-First album of "+artist.Name)
+			matchFound = true
 
 		case strings.Contains(nbr, text): // Creation Date match
 			sliceOfArtists = append(sliceOfArtists, artist)
 			msg = append(msg, nbr+"-Creation Date of "+artist.Name)
+			matchFound = true
 
 		case locations != nil: // Location match
-			sliceOfArtists = append(sliceOfArtists, artist)
 			for _, location := range locations {
 				msg = append(msg, FormatLocation(location)+"-Location concert of "+artist.Name)
 			}
+			sliceOfArtists = append(sliceOfArtists, artist)
+			matchFound = true
 		}
 	}
 
-	return sliceOfArtists, msg
+	return sliceOfArtists, msg, matchFound
 }

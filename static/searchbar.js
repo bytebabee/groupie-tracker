@@ -15,12 +15,11 @@ document.getElementById("search").addEventListener("input", function() {
             if (data.length > 0) {
                 data.forEach(item => {
                     let div = document.createElement("div");
-                    div.textContent = item;
-                    div.onclick = function() {
-                        let pureValue = item.substring(0, item.lastIndexOf("-"));
-                        document.getElementById("search").value = pureValue; // Set input value
-                        document.querySelector("form").submit(); // Submit the form
-                    };
+                    div.textContent = item; // Display the suggestion
+
+                    // Remove the div.onclick function to make the suggestions not clickable
+                    // div.onclick = function() { ... }; // This line is removed
+
                     suggestionsDiv.appendChild(div);
                 });
                 suggestionsDiv.style.display = "block";

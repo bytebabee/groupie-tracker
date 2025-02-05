@@ -17,7 +17,7 @@ func DiscoverHandler(w http.ResponseWriter, r *http.Request, artists []models.Ar
 	text := r.URL.Query().Get("query")
 
 	// Perform search only if text is not empty
-	searchedArtists, msg := utilities.Search(artists, text)
+	searchedArtists, msg, matchfound := utilities.Search(artists, text)
 
 	// Detect AJAX requests (from JavaScript)
 	if r.Header.Get("X-Requested-With") == "XMLHttpRequest" {
@@ -31,6 +31,10 @@ func DiscoverHandler(w http.ResponseWriter, r *http.Request, artists []models.Ar
 	if err != nil {
 		http.Error(w, "Error while parsing the discover template", http.StatusInternalServerError)
 		return
+	}
+
+	if !matchfound {
+		ErrorHandler(w, r)
 	}
 
 	data := DiscoverPageData{
