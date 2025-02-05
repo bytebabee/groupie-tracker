@@ -5,9 +5,11 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/static/styles/main.css">
+    <link rel="stylesheet" href="/static/styles/components.css">
     <link rel="stylesheet" href="/static/styles/breakpoints.css">
     <link rel="shortcut icon" href="/static/img/favicon.ico" />
     <title>Discover</title>
+
 </head>
 
 <body>
@@ -19,16 +21,18 @@
             </a>UPIE TRACKER
         </h1>
 
-        <div class="search-container">
+        <div class="center-container">
             <form action="/discover" method="GET">
-                <input type="text" name="query" id="search" placeholder="Search...">
+                <div class="search-container">
+                    <input type="text" id="search" name="query" placeholder="Search for artists..." autocomplete="off">
+                    <div id="suggestions" class="suggestions"></div> <!-- Suggestions appear below -->
+                </div>
+                <button type="submit">Search</button>
             </form>
-            <div class="suggestions">
-                {{range .Results}}
-                <div>{{.}}</div>
-                {{end}}
-            </div>
         </div>
+    
+        <!-- Suggestions Container -->
+        <div id="suggestions" class="suggestions"></div>
 
         <div class="mobile-icons">
             <a href="/home" class="icon-link">
@@ -71,6 +75,7 @@
             </div>
         </div>
         <script src="/static/cursor.js"></script>
+        <script src="/static/searchbar.js"></script>
 </body>
 
 </html>

@@ -6,13 +6,14 @@ import (
 	"strings"
 )
 
-func searchSlice(text string, data []string) string {
+func searchSlice(text string, data []string) []string {
+	var sliceOfInfo []string
 	for _, info := range data {
 		if strings.Contains(strings.ToLower(info), text) {
-			return info
+			sliceOfInfo = append(sliceOfInfo, info)
 		}
 	}
-	return ""
+	return sliceOfInfo
 }
 
 func Search(artists []models.Artists, text string) ([]models.Artists, []string) {
@@ -23,45 +24,36 @@ func Search(artists []models.Artists, text string) ([]models.Artists, []string) 
 	text = strings.ToLower(text)
 
 	for _, artist := range artists {
-		var matchFound bool // Flag to check if any match was found
 
 		// Prepare the variables for matching
-		member := searchSlice(text, artist.Members)
+		members := searchSlice(text, artist.Members)
 		nbr := strconv.Itoa(artist.CreationDate)
-		location := searchSlice(text, artist.Locations)
-		date := searchSlice(text, artist.ConcertDates)
+		locations := searchSlice(text, artist.Locations)
 
-		// Use switch to check the conditions
 		switch {
 		case strings.Contains(strings.ToLower(artist.Name), text): // Name match
 			sliceOfArtists = append(sliceOfArtists, artist)
-			msg = append(msg, artist.Name+" - Name")
-			matchFound = true
+			msg = append(msg, artist.Name+"-Name")
 
-		case member != "": // Member match
+		case members != nil: // Member match
+			for _, member := range members {
+				msg = append(msg, member+"-Artist/Band member")
+			}
 			sliceOfArtists = append(sliceOfArtists, artist)
-			msg = append(msg, member+" - Member")
-			matchFound = true
+
+		case strings.Contains(artist.FirstAlbum, text):
+			sliceOfArtists = append(sliceOfArtists, artist)
+			msg = append(msg, artist.FirstAlbum+"-First album of"+artist.Name)
 
 		case strings.Contains(nbr, text): // Creation Date match
 			sliceOfArtists = append(sliceOfArtists, artist)
-			msg = append(msg, nbr+" - Creation Date")
-			matchFound = true
+			msg = append(msg, nbr+"-Creation Date of "+artist.Name)
 
-		case location != "": // Location match
+		case locations != nil: // Location match
 			sliceOfArtists = append(sliceOfArtists, artist)
-			msg = append(msg, location+" - Location")
-			matchFound = true
-
-		case date != "": // Concert Date match
-			sliceOfArtists = append(sliceOfArtists, artist)
-			msg = append(msg, date+" - Date")
-			matchFound = true
-		}
-
-		// If any match was found, update sliceOfArtists and msg
-		if matchFound {
-			// You can add any additional processing here if needed for each match
+			for _, location := range locations {
+				msg = append(msg, FormatLocation(location)+"-Location concert of "+artist.Name)
+			}
 		}
 	}
 
