@@ -253,41 +253,31 @@
    SEARCH BAR
 -------------------------------- */
 
-/* Center the search bar container horizontally */
-.center-container {
-  display: flex;
-  justify-content: center; /* Centers horizontally */
-  width: 100%; /* Ensures full width */
-  margin-top: 10rem; /* Adjust as needed */
-}
-
-/* Search container with relative positioning for suggestions */
-.search-container {
-  position: relative; /* Ensures suggestions stay right under the input */
-  display: inline-block;
-  width: 300px; /* Adjust width as needed */
-}
-
-/* Style for the suggestions dropdown */
 .suggestions {
   position: absolute;
   background: white;
   border: 1px solid #ccc;
-  width: calc(100% - 2px); /* Adjust width to match the input field */
+  width: calc(100% - 20px); /* Adjust width to match the input field */
   max-height: 150px;
   overflow-y: auto;
-  display: flex;
+  display: none;
   z-index: 1000;
 }
 
-/* Style each suggestion */
 .suggestions div {
   padding: 8px;
   cursor: pointer;
 }
 
-/* Highlight on hover */
 .suggestions div:hover {
   background: #f0f0f0;
 }
 
+.search-container {
+ 
+  display : flex;
+  margin-top : 10rem;
+  position: relative; /* Ensures suggestions stay right under the input */
+  display: inline-block;
+  width: 200px; /* Adjust as needed */
+}
