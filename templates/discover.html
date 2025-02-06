@@ -48,13 +48,7 @@
     <div class="search-section">
         <div class="search-container">
             <form id="searchForm" action="/discover" method="GET">
-                <input 
-                    type="text" 
-                    name="query" 
-                    id="searchInput" 
-                    class="search-input" 
-                    placeholder="Search artists..."
-                >
+                <input type="text" name="query" id="searchInput" class="search-input" placeholder="Search artists...">
                 <button type="submit" class="search-button">
                     <img src="/static/img/search.png" alt="Search" class="search-icon">
                 </button>
@@ -85,15 +79,22 @@
             </div>
         </div>
         {{else}}
-        <div class="no-results">
-            <img src="/static/img/file-mic.png" alt="No results" class="record-player">
-            <h3>No Result</h3>
-            <p>Try searching with another word(maybe another word)?!</p>
+        <div class="error-page-layout">
+            <div class="error-container">
+                <img class="record-player" src="/static/img/file-mic.png" />
+                <div class="error-message">
+                    <h3>No result found</h3>
+                    <p>Try searching with different keywords!</p>
+                    <div class="button-container">
+                        <a href="/discover" class="content-button">Go back!</a>
+                    </div>
+                </div>
+            </div>
         </div>
         {{end}}
     </div>
     <script src="/static/cursor.js"></script>
-    <script src="/static/search.js"></script>
+    <script src="/static/searchbar.js"></script>
 </body>
 
 </html>
