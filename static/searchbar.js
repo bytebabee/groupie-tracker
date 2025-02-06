@@ -1,4 +1,4 @@
-document.getElementById("search").addEventListener("input", function() {
+document.getElementById("searchInput").addEventListener("input", function() {
     let query = this.value;
     let suggestionsDiv = document.getElementById("suggestions");
 
@@ -30,7 +30,7 @@ document.getElementById("search").addEventListener("input", function() {
 });
 
 document.addEventListener("click", function(event) {
-    if (!event.target.closest("#search") && !event.target.closest("#suggestions")) {
+    if (!event.target.closest("#searchInput") && !event.target.closest("#suggestions")) {
         document.getElementById("suggestions").style.display = "none";
     }
 });

@@ -9,6 +9,7 @@ import (
 func searchSlice(text string, data []string) []string {
 	var sliceOfInfo []string
 	for _, info := range data {
+		info = FormatLocation(info)
 		if strings.Contains(strings.ToLower(info), text) {
 			sliceOfInfo = append(sliceOfInfo, info)
 		}
@@ -33,7 +34,7 @@ func Search(artists []models.Artists, text string) ([]models.Artists, []string, 
 		switch {
 		case strings.Contains(strings.ToLower(artist.Name), text): // Name match
 			sliceOfArtists = append(sliceOfArtists, artist)
-			msg = append(msg, artist.Name+"-Name")
+			msg = append(msg, artist.Name+"-Artis/Band name")
 			matchFound = true
 
 		case members != nil: // Member match
