@@ -1,5 +1,5 @@
 document.getElementById("searchInput").addEventListener("input", function() {
-    let query = this.value;
+    let query = this.value.replace(/^\s+/, ''); // Trim only leading spaces
     let suggestionsDiv = document.getElementById("suggestions");
 
     if (query.length < 1) {
@@ -7,7 +7,7 @@ document.getElementById("searchInput").addEventListener("input", function() {
         return;
     }
 
-    fetch(`/discover?query=${query}`, { headers: { "X-Requested-With": "XMLHttpRequest" } })
+    fetch(`/discover?query=${encodeURIComponent(query)}`, { headers: { "X-Requested-With": "XMLHttpRequest" } })
         .then(response => response.json())
         .then(data => {
             suggestionsDiv.innerHTML = ""; // Clear previous suggestions
@@ -16,9 +16,6 @@ document.getElementById("searchInput").addEventListener("input", function() {
                 data.forEach(item => {
                     let div = document.createElement("div");
                     div.textContent = item; // Display the suggestion
-
-                    // Remove the div.onclick function to make the suggestions not clickable
-                    // div.onclick = function() { ... }; // This line is removed
 
                     suggestionsDiv.appendChild(div);
                 });

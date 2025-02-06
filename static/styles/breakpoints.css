@@ -149,6 +149,15 @@
 
 /* 480px breakpoint: Smallest */
 @media (max-width: 480px) {
+  .search-input,
+  .search-container,
+  .search-section
+  .suggestions{
+    width: 90%;
+  }
+  .search-input{
+    max-width: 100vw
+  }
 
   .page-layout,
   .error-page-layout {

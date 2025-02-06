@@ -20,7 +20,6 @@
                 <img class="logo" src="/static/img/logo.svg" alt="Logo" />
             </a>UPIE TRACKER
         </h1>
-
         <div class="mobile-icons">
             <a href="/home" class="icon-link">
                 <img src="/static/img/home.png" alt="Home" class="icon">
@@ -32,49 +31,51 @@
                 <img src="/static/img/about.png" alt="About" class="icon">
             </a>
         </div>
+    </div>
+    <!-- Side Menu -->
+    <div class="side-menu">
+        <a href="\" class="menu-item home">
+            <span>Home</span>
+        </a>
+        <div class="menu-item discover active"><span>Discover</div>
+        <a href="\about" class="menu-item about">
+            <span>About</span>
+        </a>
+    </div>
 
-        <div class="search-section">
-            <div class="search-container">
-                <form action="/discover" method="GET">
-                    <input type="text" name="query" id="searchInput" class="search-input"
-                        placeholder="Search artists..." autocomplete="off">
-                        <div id="suggestions" class="suggestions"></div> 
-                    <button type="submit" class="search-button">
-                        <img src="/static/img/search.png" alt="Search" class="search-icon">
-                    </button>
-                </form>
+    <div class="search-section">
+        <div class="search-container">
+            <form action="/discover" method="GET">
+                <input type="text" name="query" id="searchInput" class="search-input" placeholder="Search artists..."
+                    autocomplete="off">
+                <div id="suggestions" class="suggestions"></div>
+                <button type="submit" class="search-button">
+                    <img src="/static/img/search.png" alt="Search" class="search-icon">
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <div class="page-layout">
+        <img class="image5" src="/static/img/shape5.png" />
+        <img class="wire" src="/static/img/Vector2.png" />
+        <div class="artists-grid">
+            <div class="wrapper">
+                {{range .Artists}}
+                <div class="artist-card">
+                    <a href="/artist/{{.ID}}">
+                        <div class="image-container">
+                            <img src="{{.Image}}" alt="{{.Name}}">
+                            <div class="overlay"></div>
+                        </div>
+                    </a>
+                    <span class="artist-name">{{.Name}}</span>
+                </div>
+                {{end}}
             </div>
         </div>
-            <!-- Side Menu -->
-            <div class="side-menu">
-                <a href="\" class="menu-item home">
-                    <span>Home</span>
-                </a>
-                <div class="menu-item discover active"><span>Discover</div>
-                <a href="\about" class="menu-item about">
-                    <span>About</span>
-                </a>
-            </div>
-            <div class="page-layout">
-                <img class="image5" src="/static/img/shape5.png" />
-                <img class="wire" src="/static/img/Vector2.png" />
-                <div class="artists-grid">
-                    <div class="wrapper">
-                        {{range .Artists}}
-                        <div class="artist-card">
-                            <a href="/artist/{{.ID}}">
-                                <div class="image-container">
-                                    <img src="{{.Image}}" alt="{{.Name}}">
-                                    <div class="overlay"></div>
-                                </div>
-                            </a>
-                            <span class="artist-name">{{.Name}}</span>
-                        </div>
-                        {{end}}
-                    </div>
-                </div>
-                <script src="/static/cursor.js"></script>
-                <script src="/static/searchbar.js"></script>
+        <script src="/static/cursor.js"></script>
+        <script src="/static/searchbar.js"></script>
 </body>
 
 </html>
