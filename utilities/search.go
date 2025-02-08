@@ -20,6 +20,7 @@ func searchSlice(text string, data []string) []string {
 func Search(artists []models.Artists, text string) ([]models.Artists, []string, bool) {
 	var sliceOfArtists []models.Artists
 	var msg []string
+	text = ExtractGroupName(text)
 
 	// Convert the text to lowercase for case-insensitive matching
 	text = strings.ToLower(text)
@@ -34,12 +35,12 @@ func Search(artists []models.Artists, text string) ([]models.Artists, []string, 
 		switch {
 		case strings.Contains(strings.ToLower(artist.Name), text): // Name match
 			sliceOfArtists = append(sliceOfArtists, artist)
-			msg = append(msg, artist.Name+" - Artist/Band name")
+			msg = append(msg, artist.Name)
 			matchFound = true
 
 		case members != nil: // Member match
 			for _, member := range members {
-				msg = append(msg, member+" - Artist/Band member")
+				msg = append(msg, member+" - Member of "+artist.Name)
 			}
 			sliceOfArtists = append(sliceOfArtists, artist)
 			matchFound = true

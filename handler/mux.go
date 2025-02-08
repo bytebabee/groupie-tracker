@@ -19,6 +19,12 @@ func TempSelector(artists []models.Artists) *http.ServeMux {
 
 	mux.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
+		case "/apple-touch-icon.png": // For apple products not to have the 404 error
+			http.ServeFile(w, r, "static/img/favicon.ico")
+		case "/apple-touch-icon-precomposed.png":
+			http.ServeFile(w, r, "static/img/favicon.ico")
+		case "/favicon.ico":
+			http.ServeFile(w, r, "static/img/favicon.ico")
 		case "/", "/home":
 			HomeHandler(w, r, artists)
 		case "/discover":

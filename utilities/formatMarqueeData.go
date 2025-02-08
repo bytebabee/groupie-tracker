@@ -74,3 +74,9 @@ func FormatLocation(location string) string {
 	// Join the words back together
 	return strings.Join(words, " ")
 }
+func ExtractGroupName(text string) string {
+	if idx := strings.Index(text, "of "); idx != -1 {
+		return text[idx+3:] // Move past "of " (3 characters)
+	}
+	return text
+}
