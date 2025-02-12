@@ -40,7 +40,7 @@ func (c *Client) FetchFunc(url string, target interface{}) error {
 func (c *Client) Fetcher(BaseUrl string) ([]models.Artists, error) {
 	var artists []models.Artists
 
-	if err := c.FetchFunc(BaseUrl+"/artists", &artists); err != nil {
+	if err := c.FetchFunc(BaseUrl, &artists); err != nil {
 		fmt.Print("Error fetching data from API\n")
 		return nil, err
 	}
