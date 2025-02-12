@@ -62,7 +62,7 @@ func ArtistHandler(w http.ResponseWriter, r *http.Request, artists []models.Arti
 	case "ConcertDates":
 		pageData = ArtistPageData{
 			Artist:         artist,
-			MarqueeContent: utilities.FormatData(artist.ConcertDates),
+			MarqueeContent: utilities.FormatDates(artist.ConcertDates),
 		}
 	default:
 		pageData = ArtistPageData{

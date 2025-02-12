@@ -11,15 +11,13 @@
   cursor: pointer;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
-
 .content-button:hover {
   transform: translate(-2px, -2px);
   box-shadow: 4px 4px 0 var(--color-black);
 }
-
 .back-button {
   position: absolute;
-  top: 20px;
+  top: 30px;
   left: 20px;
   color: #000;
   padding: 10px 20px;
@@ -27,23 +25,19 @@
   font-size: var(--font-md);
   transition: text-decoration;
 }
-
 .back-button:hover {
   text-decoration: underline;
 }
-
 .button-container {
   display: flex;
   gap: 10px;
   justify-content: center;
   width: 100%;
 }
-
 .discover-button-container {
   display: flex;
   justify-content: flex-start;
 }
-
 /* -------------------------------
    ACCORDION
 -------------------------------- */
@@ -56,23 +50,19 @@
   margin: 0;
   padding: 0;
 }
-
 .accordion-container {
   margin: 0;
   padding: 0;
 }
-
 .members-list {
   list-style-type: none;
   margin: 0;
   padding: 0;
 }
-
 .members-list li {
   margin: 0;
   padding: 0;
 }
-
 /* Reset the label and content styles */
 .tab__label {
   display: flex;
@@ -83,7 +73,6 @@
   margin: 0;
   margin-bottom: 10px;
 }
-
 .tab__label::after {
   content: "\276F";
   /* Arrow icon */
@@ -93,35 +82,28 @@
   transform: rotate(90deg);
   transition: all 0.35s;
 }
-
 .accordion-checkbox:checked+.tab__label::after {
   transform: rotate(270deg);
   /* Rotate arrow when checked */
 }
-
 .accordion-checkbox {
   position: absolute;
   opacity: 0;
   /* Hide the checkbox */
   z-index: -1;
 }
-
 .tab__content {
   max-height: 0;
   overflow: hidden;
   transition: all 0.35s;
 }
-
 .accordion-checkbox:checked~.tab__content {
   max-height: fit-content;
-  /* Adjust height when expanded */
 }
-
 /* Hover animation for arrow */
 .accordion-checkbox:not(:checked)+.tab__label:hover::after {
   animation: bounce .5s infinite;
 }
-
 /* -------------------------------
    MARQUEE
 -------------------------------- */
@@ -140,7 +122,6 @@
   user-select: none;
   gap: var(--gap);
 }
-
 .marquee-content {
   font-size: var(--font-md);
   list-style: none;
@@ -152,11 +133,9 @@
   padding: 0;
   animation: scroll 50s linear infinite;
 }
-
 .marquee:hover .marquee-content {
   animation-play-state: paused;
 }
-
 /* -------------------------------
    ARTIST CARDS
 -------------------------------- */
@@ -171,34 +150,32 @@
   flex-direction: column;
   align-items: center;
   text-align: center;
-  width: 200px;
-  height: 250px;
+  width: 240px;
+  height: 300px;
   position: relative;
+  margin: 0 auto;
 }
-
 .artist-card:hover {
   transform: translate(-5px, -5px);
   box-shadow: 10px 7px 0 #000;
 }
-
 .artist-card img,
 .image-container img {
   width: 100%;
-  height: auto;
+  height: 100%;
   border-radius: 100%;
-  display: block;
+  object-fit: cover;
 }
-
 .image-container {
   position: relative;
   width: 100%;
   height: auto;
+  aspect-ratio: 1/1;
   display: flex;
   justify-content: center;
   align-items: center;
   overflow: hidden;
 }
-
 .artist-card .overlay {
   position: absolute;
   top: 0;
@@ -206,23 +183,25 @@
   width: 100%;
   height: 100%;
   background-color: rgba(125, 3, 255, 0.504);
-  border-radius: 100px;
+  border-radius: 100%;
   opacity: 1;
   transition: opacity 0.3s ease;
   pointer-events: none;
 }
-
 .artist-card:hover .overlay {
   opacity: 0;
 }
-
 .artist-name {
-  font-size: var(--font-sm);
-  color: #000;
-  margin-top: 10px;
+  font-family: 'Archivo', sans-serif;
+  font-size: var(--font-md);
+  color: var(--color-black);
+  margin-top: 15px;
   position: relative;
+  font-weight: bold;
 }
-
+.artist-card:hover .artist-name {
+  animation: namesBounce .5s infinite;
+}
 /* -------------------------------
    CURSOR
 -------------------------------- */
@@ -237,24 +216,19 @@
   z-index: 1000;
   pointer-events: none;
   transition: transform 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-
   /* Create the color swap effect */
   backdrop-filter: invert(1) hue-rotate(180deg);
   mix-blend-mode: difference;
 }
-
 .cursor.active {
   transform: scale(1.5);
 }
-
-
 /* -------------------------------
    SEARCH BAR
 -------------------------------- */
 .search-container {
-  display : flex;
   position: relative;
-  width: 100%;
+  width: fit-content;
 }
 .search-section {
   position: fixed;
@@ -272,7 +246,7 @@
   border: 2px solid var(--color-black);
   border-radius: var(--border-radius);
   font-size: var(--font-md);
-  width: 100%; /* This makes it flexible */
+  width: 600px;
   background: var(--color-purple);
   box-shadow: var(--box-shadow);
   transition: transform 0.3s, box-shadow 0.3s;
@@ -307,8 +281,6 @@
   top: 100%;
   left: 0;
   right: 0;
-  width: 90%; /* This makes it flexible */
-  max-width: 450px; /* Optional: maximum width limit */
   background: var(--color-purple);
   border: 2px solid var(--color-black);
   border-top: none;
@@ -320,7 +292,6 @@
   display: none;
   box-shadow: var(--box-shadow);
 }
-
 /* Firefox */
 * {
   scrollbar-width: thin;

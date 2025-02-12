@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"groupie-tracker/models"
+	"log"
 	"net/http"
 	"sync"
 	"time"
@@ -40,7 +41,7 @@ func (c *Client) FetchFunc(url string, target interface{}) error {
 func (c *Client) Fetcher(BaseUrl string) ([]models.Artists, error) {
 	var artists []models.Artists
 
-	if err := c.FetchFunc(BaseUrl+"/artists", &artists); err != nil {
+	if err := c.FetchFunc(BaseUrl, &artists); err != nil {
 		fmt.Print("Error fetching data from API\n")
 		return nil, err
 	}
@@ -83,9 +84,11 @@ func (c *Client) Fetcher(BaseUrl string) ([]models.Artists, error) {
 	}()
 	for err := range chanErr {
 		if err != nil {
+			log.Printf("Fetching error: %v", err)
 			return nil, err
 		}
 	}
+	log.Println("Artists fetched correctly")
 	return artists, nil
 
 }

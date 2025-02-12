@@ -5,11 +5,13 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/static/styles/main.css">
-    <link rel="stylesheet" href="/static/styles/components.css">
     <link rel="stylesheet" href="/static/styles/breakpoints.css">
-    <link rel="shortcut icon" href="/static/img/favicon.ico" />
+    <link rel="shortcut icon" type="image/x-icon" href="/static/img/favicon.ico">
+    <link rel="icon" type="image/x-icon" href="/static/img/favicon.ico">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <link rel="apple-touch-icon" href="/static/img/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" href="/static/img/favicon.ico">
     <title>Discover</title>
-
 </head>
 
 <body>
@@ -42,23 +44,25 @@
             <span>About</span>
         </a>
     </div>
-
+    <!-- Search Section -->
     <div class="search-section">
         <div class="search-container">
-            <form action="/discover" method="GET">
-                <input type="text" name="query" id="searchInput" class="search-input" placeholder="Search artists..."
-                    autocomplete="off">
-                <div id="suggestions" class="suggestions"></div>
+            <form id="searchForm" action="/discover" method="GET">
+                <input type="text" name="query" id="searchInput" class="search-input" placeholder="Search artists...">
                 <button type="submit" class="search-button">
                     <img src="/static/img/search.png" alt="Search" class="search-icon">
                 </button>
             </form>
+            <div class="suggestions">
+                {{range .Results}}
+                <a href="/discover?query={{.}}" class="suggestion-item">{{.}}</a>
+                {{end}}
+            </div>
         </div>
     </div>
-
+    <!-- Original page layout -->
     <div class="page-layout">
-        <img class="image5" src="/static/img/shape5.png" />
-        <img class="wire" src="/static/img/Vector2.png" />
+        {{if .Artists}}
         <div class="artists-grid">
             <div class="wrapper">
                 {{range .Artists}}
@@ -74,8 +78,23 @@
                 {{end}}
             </div>
         </div>
-        <script src="/static/cursor.js"></script>
-        <script src="/static/searchbar.js"></script>
+        {{else}}
+        <div class="error-page-layout">
+            <div class="error-container">
+                <img class="record-player" src="/static/img/file-mic.png" />
+                <div class="error-message">
+                    <h3>No result found</h3>
+                    <p>Try searching with different keywords!</p>
+                    <div class="button-container">
+                        <a href="/discover" class="content-button">Go back!</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{end}}
+    </div>
+    <script src="/static/cursor.js"></script>
+    <script src="/static/searchbar.js"></script>
 </body>
 
 </html>

@@ -1,7 +1,6 @@
 package handler
 
 import (
-	"encoding/json"
 	"groupie-tracker/models"
 	"groupie-tracker/utilities"
 	"html/template"
@@ -14,17 +13,13 @@ type DiscoverPageData struct {
 }
 
 func DiscoverHandler(w http.ResponseWriter, r *http.Request, artists []models.Artists) {
+
 	text := r.URL.Query().Get("query")
+	text = utilities.ExtractGroupName(text)
+	// text = utilities.InputFormat(text)
 
 	// Perform search only if text is not empty
-	searchedArtists, msg, matchfound := utilities.Search(artists, text)
-
-	// Detect AJAX requests (from JavaScript)
-	if r.Header.Get("X-Requested-With") == "XMLHttpRequest" {
-		w.Header().Set("Content-Type", "application/json")
-		json.NewEncoder(w).Encode(msg) // Return only suggestions
-		return
-	}
+	searchedArtists, msg := utilities.Search(artists, text)
 
 	// Render the discover.html template for normal requests
 	tempDiscover, err := template.ParseFiles("templates/discover.html")
@@ -33,8 +28,8 @@ func DiscoverHandler(w http.ResponseWriter, r *http.Request, artists []models.Ar
 		return
 	}
 
-	if !matchfound {
-		ErrorHandler(w, r)
+	if searchedArtists == nil {
+		w.WriteHeader(http.StatusBadRequest)
 	}
 
 	data := DiscoverPageData{

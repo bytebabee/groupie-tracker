@@ -1,33 +1,49 @@
-document.getElementById("searchInput").addEventListener("input", function() {
-    let query = this.value.replace(/^\s+/, ''); // Trim only leading spaces
-    let suggestionsDiv = document.getElementById("suggestions");
+// Get all the elements we need
+const searchForm = document.getElementById('searchForm');
+const searchInput = document.getElementById('searchInput');
+const suggestions = document.querySelector('.suggestions');
+const searchContainer = document.querySelector('.search-container');
 
-    if (query.length < 1) {
-        suggestionsDiv.style.display = "none";
-        return;
+// On page load, check if there's a search term in the URL
+window.onload = () => {
+    const searchTerm = new URLSearchParams(window.location.search).get('query');
+    if (searchTerm) searchInput.value = searchTerm;
+};
+
+// Function to fetch and display suggestions
+const fetchSuggestions = (searchTerm) => {
+    if (searchTerm.length > 0) {
+        fetch(`/discover?query=${encodeURIComponent(searchTerm)}`)
+            .then(response => response.text())
+            .then(html => {
+                const newSuggestions = new DOMParser()
+                    .parseFromString(html, 'text/html')
+                    .querySelector('.suggestions');
+                if (newSuggestions) {
+                    suggestions.innerHTML = newSuggestions.innerHTML;
+                    suggestions.style.display = 'block';
+                }
+            });
+    } else {
+        suggestions.style.display = 'none';
     }
+};
 
-    fetch(`/discover?query=${encodeURIComponent(query)}`, { headers: { "X-Requested-With": "XMLHttpRequest" } })
-        .then(response => response.json())
-        .then(data => {
-            suggestionsDiv.innerHTML = ""; // Clear previous suggestions
+// When user types in the search box
+searchInput.addEventListener('input', () => fetchSuggestions(searchInput.value));
 
-            if (data.length > 0) {
-                data.forEach(item => {
-                    let div = document.createElement("div");
-                    div.textContent = item; // Display the suggestion
-
-                    suggestionsDiv.appendChild(div);
-                });
-                suggestionsDiv.style.display = "block";
-            } else {
-                suggestionsDiv.style.display = "none";
-            }
-        });
+// When user clicks on search box, show suggestions if available
+searchInput.addEventListener('focus', () => {
+    if (searchInput.value.length > 0) suggestions.style.display = 'block';
 });
 
-document.addEventListener("click", function(event) {
-    if (!event.target.closest("#searchInput") && !event.target.closest("#suggestions")) {
-        document.getElementById("suggestions").style.display = "none";
-    }
+// When user clicks outside search area, hide suggestions
+document.addEventListener('click', (event) => {
+    if (!searchContainer.contains(event.target)) suggestions.style.display = 'none';
+});
+
+// When user submits the search
+searchForm.addEventListener('submit', (event) => {
+    event.preventDefault();
+    window.location.href = `/discover?query=${encodeURIComponent(searchInput.value)}`;
 });

@@ -2,7 +2,6 @@
    IMPORTS
 -------------------------------- */
 @import url('https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,100..900;1,100..900&display=swap');
-
 /* -------------------------------
    VARIABLES
 -------------------------------- */
@@ -14,13 +13,11 @@
   --color-orange: #FF983A;
   --color-bg: #EBE9EA;
   --color-black: #000;
-
   /* Measurements */
   --header-height: 5.875rem;
   --side-menu-width: 5.875rem;
   --border-radius: 10px;
   --box-shadow: 4px 6px 0 var(--color-black);
-
   /* Font sizes */
   --font-xl: 36px;
   --font-lg: 30px;
@@ -28,7 +25,6 @@
   --font-sm: 18px;
   --font-xs: 16px;
 }
-
 /* -------------------------------
    GLOBAL STYLES
 -------------------------------- */
@@ -41,26 +37,18 @@ body {
   height: 100vh;
   overflow: hidden;
 }
-
 .mobile-icons,
 .arrow-button {
   display: none;
   /* Hide by default */
 }
-
 a {
   text-decoration: none;
 }
-
-::-webkit-scrollbar {
-  display: none;
-}
-
 h2 {
   font-size: var(--font-md);
   margin-top: 20px;
 }
-
 /* -------------------------------
    PAGE LAYOUT
 -------------------------------- */
@@ -68,18 +56,24 @@ h2 {
   display: flex;
   flex: 1;
   height: calc(100vh - var(--header-height));
+  width: calc(100vw - var(--side-menu-width));
+  position: relative;
+  overflow-y: auto;
+  justify-content: center;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  margin-top: 80px;
 }
-
+/* Hide scrollbar for Chrome, Safari and Opera */
+.page-layout::-webkit-scrollbar {
+  display: none;
+}
 .main-content {
   display: flex;
   flex: 1;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-  align-items: center;
   position: relative;
   width: calc(100vw - var(--side-menu-width));
 }
-
 /* -------------------------------
    HEADER STYLES
 -------------------------------- */
@@ -96,7 +90,6 @@ h2 {
   padding-left: 3%;
   padding-right: 3%;
 }
-
 /* Styling for header title (h1) */
 .header h1 {
   font-size: var(--font-xl);
@@ -108,7 +101,6 @@ h2 {
   display: flex;
   align-items: center;
 }
-
 /* -------------------------------
    SIDE MENU
 -------------------------------- */
@@ -117,14 +109,12 @@ h2 {
   height: 100vh;
   display: flex;
   flex-direction: column;
-  position: absolute;
-  top: var(--header-height);
-  right: 0;
+  position: fixed;
   top: 0;
+  right: 0;
   border-left: 2px solid var(--color-black);
   z-index: 10;
 }
-
 .side-menu .menu-item {
   flex: 1;
   display: flex;
@@ -137,30 +127,24 @@ h2 {
   background-color: var(--color-lime);
   color: var(--color-black);
 }
-
 .side-menu .menu-item:last-child {
   border-bottom: none;
 }
-
 .menu-item span {
   display: inline-block;
   transform: rotate(90deg);
   transform-origin: center center;
 }
-
 .menu-item.active {
   background-color: var(--color-orange);
   cursor: auto;
 }
-
 .menu-item:hover {
   filter: brightness(95%);
 }
-
 .menu-item.active:hover {
   filter: brightness(100%);
 }
-
 /* -------------------------------
    ANIMATIONS
 -------------------------------- */
@@ -168,28 +152,31 @@ h2 {
   0% {
     transform: rotateZ(0deg);
   }
-
   100% {
     transform: rotate(360deg);
   }
 }
-
 @keyframes scroll {
   from {
     transform: translateX(0);
   }
-
   to {
     transform: translateX(calc(-100% - var(--gap)));
   }
 }
-
 @keyframes bounce {
   25% {
     transform: rotate(90deg) translate(.25rem);
   }
-
   75% {
     transform: rotate(90deg) translate(-.25rem);
+  }
+}
+@keyframes namesBounce {
+  25% {
+    transform: translateY(-3px);
+  }
+  75% {
+    transform: translateY(3px);
   }
 }

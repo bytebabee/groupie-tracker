@@ -5,7 +5,7 @@ import (
 )
 
 const (
-	BaseUrl = "https://groupietrackers.herokuapp.com/api"
+	BaseUrl = "https://groupietrackers.herokuapp.com/api/artists"
 )
 
 func FetchArtistsData() ([]models.Artists, error) {

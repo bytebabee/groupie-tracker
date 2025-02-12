@@ -6,7 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/static/styles/main.css">
     <link rel="stylesheet" href="/static/styles/breakpoints.css">
-    <link rel="shortcut icon" href="/static/img/favicon.ico" />
+    <link rel="shortcut icon" type="image/x-icon" href="/static/img/favicon.ico">
+    <link rel="icon" type="image/x-icon" href="/static/img/favicon.ico">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <link rel="apple-touch-icon" href="/static/img/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" href="/static/img/favicon.ico">
     <title>{{.Artist.Name}}</title>
 </head>
 
@@ -41,9 +45,6 @@
         </a>
     </div>
     <div class="artist-page-layout">
-        <div class="main-content">
-            <img class="wire2" src="/static/img/Vector3.png" />
-        </div>
         <!-- Top section with artist info -->
         <div class="artist-info-section">
             <!-- Left side - Image -->

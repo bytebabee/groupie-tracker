@@ -74,3 +74,33 @@ func FormatLocation(location string) string {
 	// Join the words back together
 	return strings.Join(words, " ")
 }
+
+func FormatDates(dates []string) []string {
+	var formatted []string
+	for _, date := range dates {
+		if strings.HasPrefix(date, "*") {
+			formatted = append(formatted, strings.TrimPrefix(date, "*"))
+		}
+	}
+	return formatted
+}
+
+func ExtractGroupName(text string) string {
+	// Look for "of " and check if there’s an ampersand to trim the rest
+	if idx := strings.Index(text, "of "); idx != -1 {
+		// Find the first occurrence of "&" after "of "
+		return strings.ToLower(text[idx+3:])
+	}
+	if idx := strings.Index(text, "Band/Artist"); idx != -1 {
+		// Find the first occurrence of "&" after "of "
+		return strings.ToLower(text[:idx])
+	}
+	// Return the original text if no match
+	return strings.ToLower(text)
+}
+
+func InputFormat(text string) string {
+	text = strings.ReplaceAll(text, ", ", "-")
+	text = strings.ReplaceAll(text, " ", "_")
+	return text
+}
