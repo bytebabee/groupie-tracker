@@ -21,7 +21,6 @@ func DiscoverHandler(w http.ResponseWriter, r *http.Request, artists []models.Ar
 	// Perform search only if text is not empty
 	searchedArtists, msg := utilities.Search(artists, text)
 
-	// Render the discover.html template for normal requests
 	tempDiscover, err := template.ParseFiles("templates/discover.html")
 	if err != nil {
 		http.Error(w, "Error while parsing the discover template", http.StatusInternalServerError)
