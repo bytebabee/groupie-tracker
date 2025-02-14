@@ -41,7 +41,7 @@ func BadRequestHandler(w http.ResponseWriter, r *http.Request) {
 		ErrorFiveHandler(w, r, err)
 		return
 	}
-	log.Print("Error: Bad request")
+	w.WriteHeader(http.StatusBadRequest)
 	temp.Execute(w, nil)
 }
 

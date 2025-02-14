@@ -76,8 +76,7 @@ func ArtistHandler(w http.ResponseWriter, r *http.Request, artists []models.Arti
 		ErrorFiveHandler(w, r, err)
 		return
 	}
-	if err := tempArtist.Execute(w, pageData); err != nil {
+	w.WriteHeader(http.StatusOK)
+	tempArtist.Execute(w, pageData)
 
-		ErrorFiveHandler(w, r, err)
-	}
 }
