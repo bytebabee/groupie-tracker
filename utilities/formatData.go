@@ -75,6 +75,7 @@ func FormatLocation(location string) string {
 	return strings.Join(words, " ")
 }
 
+// Format only dates
 func FormatDates(dates []string) []string {
 	var formatted []string
 	for _, date := range dates {
@@ -86,21 +87,30 @@ func FormatDates(dates []string) []string {
 }
 
 func ExtractGroupName(text string) string {
-	// Look for "of " and check if there’s an ampersand to trim the rest
+	// Look for "of "/"Band/Artist" and check if there’s an ampersand to trim the rest
 	if idx := strings.Index(text, "of "); idx != -1 {
 		// Find the first occurrence of "&" after "of "
 		return strings.ToLower(text[idx+3:])
 	}
-	if idx := strings.Index(text, "Band/Artist"); idx != -1 {
-		// Find the first occurrence of "&" after "of "
+	if idx := strings.Index(text, "- Band/Artist"); idx != -1 {
 		return strings.ToLower(text[:idx])
 	}
 	// Return the original text if no match
 	return strings.ToLower(text)
 }
 
+// Format the string to match the json format
 func InputFormat(text string) string {
 	text = strings.ReplaceAll(text, ", ", "-")
 	text = strings.ReplaceAll(text, " ", "_")
 	return text
+}
+
+func ContainsAny(query string, substrings []string) bool {
+	for _, substring := range substrings {
+		if strings.Contains(query, substring) {
+			return true
+		}
+	}
+	return false
 }

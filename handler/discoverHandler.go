@@ -5,6 +5,7 @@ import (
 	"groupie-tracker/utilities"
 	"html/template"
 	"net/http"
+	"strconv"
 )
 
 type DiscoverPageData struct {
@@ -13,29 +14,43 @@ type DiscoverPageData struct {
 }
 
 func DiscoverHandler(w http.ResponseWriter, r *http.Request, artists []models.Artists) {
-
+	uneditedURLQuery := r.URL.Query().Get("query")
 	text := r.URL.Query().Get("query")
 	text = utilities.ExtractGroupName(text)
-	// text = utilities.InputFormat(text)
-
 	// Perform search only if text is not empty
-	searchedArtists, msg := utilities.Search(artists, text)
+	searchedArtists, msg, id := utilities.Search(artists, text)
 
-	tempDiscover, err := template.ParseFiles("templates/discover.html")
-	if err != nil {
-		http.Error(w, "Error while parsing the discover template", http.StatusInternalServerError)
+	if len(id) == 1 && utilities.ContainsAny(uneditedURLQuery, []string{
+		"Band/Artist",
+		"Member of",
+		"First album of",
+		"Concert location of",
+		"Creation date of",
+	}) {
+		http.Redirect(w, r, "/artist/"+strconv.Itoa(id[0]), http.StatusSeeOther)
 		return
-	}
+	} else {
+		// Check if search resulted in no artists, and set the proper response status
+		if searchedArtists == nil {
+			BadRequestHandler(w, r)
+			return
+		}
 
-	if searchedArtists == nil {
-		w.WriteHeader(http.StatusBadRequest)
-	}
+		// No need to call WriteHeader here if we're doing it in the if branch
+		tempDiscover, err := template.ParseFiles("templates/discover.html")
+		if err != nil {
+			http.Error(w, "Error while parsing the discover template", http.StatusInternalServerError)
+			return
+		}
 
-	data := DiscoverPageData{
-		Artists: searchedArtists,
-		Results: msg,
-	}
+		// Proceed with writing the response with status OK
+		data := DiscoverPageData{
+			Artists: searchedArtists,
+			Results: msg,
+		}
 
-	w.WriteHeader(http.StatusOK)
-	tempDiscover.Execute(w, data)
+		// This is the only place we set the status code to OK
+		w.WriteHeader(http.StatusOK)
+		tempDiscover.Execute(w, data)
+	}
 }
