@@ -19,15 +19,21 @@ const fetchSuggestions = (searchTerm) => {
                 const newSuggestions = new DOMParser()
                     .parseFromString(html, 'text/html')
                     .querySelector('.suggestions');
-                if (newSuggestions) {
+
+                if (newSuggestions && newSuggestions.innerHTML.trim() !== '') {
                     suggestions.innerHTML = newSuggestions.innerHTML;
                     suggestions.style.display = 'block';
+                } else {
+                    suggestions.innerHTML = ''; // Clear old suggestions
+                    suggestions.style.display = 'none';
                 }
             });
     } else {
+        suggestions.innerHTML = ''; // Clear old suggestions
         suggestions.style.display = 'none';
     }
 };
+
 
 // When user types in the search box
 searchInput.addEventListener('input', () => fetchSuggestions(searchInput.value));

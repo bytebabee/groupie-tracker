@@ -102,6 +102,7 @@ func ExtractGroupName(text string) string {
 // Format the string to match the json format
 func InputFormat(text string) string {
 	text = strings.ReplaceAll(text, ", ", "-")
+	text = strings.ReplaceAll(text, ",", "-")
 	text = strings.ReplaceAll(text, " ", "_")
 	return text
 }

@@ -37,7 +37,7 @@ func ArtistHandler(w http.ResponseWriter, r *http.Request, artists []models.Arti
 	relationsData := utilities.FormatRelations(artist.Relations)
 
 	var MarqueeContent string
-	if r.Method == http.MethodPost {
+	if r.Method == http.MethodPost { // Check if the request method is POST (we dont want to write the value of MarqueeContent in the URL
 		err := r.ParseForm()
 		if err != nil {
 			ErrorFiveHandler(w, r, err)

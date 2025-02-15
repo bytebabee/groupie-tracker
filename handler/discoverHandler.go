@@ -39,7 +39,7 @@ func DiscoverHandler(w http.ResponseWriter, r *http.Request, artists []models.Ar
 		// No need to call WriteHeader here if we're doing it in the if branch
 		tempDiscover, err := template.ParseFiles("templates/discover.html")
 		if err != nil {
-			http.Error(w, "Error while parsing the discover template", http.StatusInternalServerError)
+			ErrorFiveHandler(w, r, err)
 			return
 		}
 
