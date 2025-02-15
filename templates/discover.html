@@ -62,7 +62,6 @@
     </div>
     <!-- Original page layout -->
     <div class="page-layout">
-        {{if .Artists}}
         <div class="artists-grid">
             <div class="wrapper">
                 {{range .Artists}}
@@ -78,20 +77,6 @@
                 {{end}}
             </div>
         </div>
-        {{else}}
-        <div class="error-page-layout">
-            <div class="error-container">
-                <img class="record-player" src="/static/img/file-mic.png" />
-                <div class="error-message">
-                    <h3>No result found</h3>
-                    <p>Try searching with different keywords!</p>
-                    <div class="button-container">
-                        <a href="/discover" class="content-button">Go back!</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        {{end}}
     </div>
     <script src="/static/cursor.js"></script>
     <script src="/static/searchbar.js"></script>
