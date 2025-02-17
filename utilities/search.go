@@ -62,7 +62,7 @@ func Search(artists []models.Artists, text string) ([]models.Artists, []string, 
 
 		case strings.Contains(nbr, text): // Creation Date match
 			sliceOfArtists = append(sliceOfArtists, artist)
-			msg = append(msg, nbr+" - Creation date of "+artist.Name+:" ")
+			msg = append(msg, nbr+" - Creation date of "+artist.Name+" ")
 			id = append(id, artist.ID)
 
 		case locations != nil: // Location match
