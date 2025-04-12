@@ -69,4 +69,4 @@ The application uses the following API endpoints:
 
 ## Authors
 
-- Created by Irem ([@bytebabee](https://github.com/bytebabee)) and Taha ([@tcavuslu](https://github.com/tcavuslu)) 
+- Created by Irem ([@iremnurc](https://github.com/iremnurc)) and Taha ([@tcavuslu](https://github.com/tcavuslu)) 
