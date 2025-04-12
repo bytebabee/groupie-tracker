@@ -30,9 +30,23 @@ func DiscoverHandler(w http.ResponseWriter, r *http.Request, artists []models.Ar
 		http.Redirect(w, r, "/artist/"+strconv.Itoa(id[0]), http.StatusSeeOther)
 		return
 	} else {
-		// Check if search resulted in no artists, and set the proper response status
+		// Check if search resulted in no artists
 		if searchedArtists == nil {
-			BadRequestHandler(w, r)
+			// Instead of calling BadRequestHandler, we'll show the "no results found" message
+			tempDiscover, err := template.ParseFiles("templates/discover.html")
+			if err != nil {
+				ErrorFiveHandler(w, r, err)
+				return
+			}
+
+			// Create data with empty Artists slice to trigger the "no results found" message
+			data := DiscoverPageData{
+				Artists: []models.Artists{},
+				Results: msg,
+			}
+
+			w.WriteHeader(http.StatusOK)
+			tempDiscover.Execute(w, data)
 			return
 		}
 

@@ -62,7 +62,6 @@ h2 {
   justify-content: center;
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none; /* IE and Edge */
-  margin-top: 80px;
 }
 /* Hide scrollbar for Chrome, Safari and Opera */
 .page-layout::-webkit-scrollbar {

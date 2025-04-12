@@ -63,6 +63,7 @@
     <!-- Original page layout -->
     <div class="page-layout">
         <div class="artists-grid">
+            {{if .Artists}}
             <div class="wrapper">
                 {{range .Artists}}
                 <div class="artist-card">
@@ -76,10 +77,20 @@
                 </div>
                 {{end}}
             </div>
+            {{else}}
+            <div class="error-page-layout">
+                <div class="error-container">
+                    <img class="record-player" src="/static/img/record-player.png" />
+                    <div class="error-message">
+                        <h3>No results found</h3>
+                        <p>Try different search terms!</p>
+                    </div>
+                </div>
+                {{end}}
+            </div>
         </div>
-    </div>
-    <script src="/static/cursor.js"></script>
-    <script src="/static/searchbar.js"></script>
+        <script src="/static/cursor.js"></script>
+        <script src="/static/searchbar.js"></script>
 </body>
 
 </html>
